@@ -1,0 +1,59 @@
+name: socialsteps
+description: "socialsteps"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.5.1
+  cupertino_icons: ^1.0.8
+  firebase_core: ^3.15.2
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  fl_chart: ^0.66.0
+  tflite_flutter: ^0.12.1
+  video_player: ^2.8.2
+  camera: ^0.11.1
+  google_mlkit_face_detection: ^0.13.2
+  permission_handler: ^11.3.1
+  shared_preferences: ^2.2.2
+ 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/emotions/easy/
+    - assets/emotions/medium/
+    - assets/emotions/hard/
+    - assets/puzzle/level1/
+    - assets/puzzle/level2/
+    - assets/puzzle/level3/
+    - assets/images/
+    - assets/avatar/
+    - assets/recommendation_model.tflite
+    - assets/videos/
+    - assets/icon/
+
+  
+  fonts:
+    - family: Aclonica
+      fonts:
+        - asset: assets/fonts/Aclonica-Regular.ttf
