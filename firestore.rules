@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Default deny ────────────────────────────────────────────────────────
+    // Any path not explicitly matched below is denied to everyone.
+
+    // ── Parent user documents ────────────────────────────────────────────────
+    // A logged-in user may only read/write their own parent document
+    // (auth UID must equal the document ID).
+    match /parents/{parentId} {
+      allow read, write: if request.auth != null
+                         && request.auth.uid == parentId;
+
+      // ── Child documents ────────────────────────────────────────────────────
+      // Covers user profile, progress data, and activity data stored under
+      // parents/{parentId}/children/{childId}.
+      match /children/{childId} {
+        allow read, write: if request.auth != null
+                           && request.auth.uid == parentId;
+      }
+    }
+
+    // ── Telemetry logs ───────────────────────────────────────────────────────
+    // Authenticated users may create log entries (write-only).
+    // Client-side reads, updates, and deletes are denied.
+    match /telemetry_logs/{logId} {
+      allow create: if request.auth != null;
+      allow read, update, delete: if false;
+    }
+
+  }
+}
